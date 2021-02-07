@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "mobileapp-executor",
+    "name": "mobileapp",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "koahp6u6c4"
+  }
+}

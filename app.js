@@ -1,0 +1,27 @@
+"use strict";
+const express = require("express");
+const app = express();
+const { getEventList, getEventById } = require("./db_utils");
+
+app.get("/events/list", async (req, res) => {
+  const events = await getEventList();
+  return res.json({
+    events
+  });
+});
+
+app.get("/event/:eventId", async (req, res) => {
+  const event = await getEventById(req.params.eventId);
+  if (!event) {
+    return res.status(500).send({
+      error: "Invalid event id"
+    });
+  }
+  return res.json({
+    event
+  });
+});
+
+// app.listen(4000); // <-- comment this line out from your app
+
+module.exports = app; // export your app so aws-serverless-express can use it
