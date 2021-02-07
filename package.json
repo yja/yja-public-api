@@ -1,0 +1,21 @@
+{
+  "name": "claudia-express",
+  "version": "1.0.0",
+  "description": "Example application for running a Node Express app on AWS Lambda using Amazon API Gateway.",
+  "main": "lambda.js",
+  "scripts": {
+    "deploy": "claudia create --name mobileapp --handler lambda.handler --deploy-proxy-api --region us-east-1",
+    "update": "claudia update --set-env-from-json .env.json",
+    "generate-proxy": "claudia generate-serverless-express-proxy --express-module app"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "aws-serverless-express": "^3.4.0",
+    "express": "^4.14.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5"
+  },
+  "devDependencies": {
+    "claudia": "5.12.0"
+  }
+}
