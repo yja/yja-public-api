@@ -12,7 +12,7 @@ const bucket_url = "https://yja-media-feferfre5435jkjkj567wer.s3.amazonaws.com";
 
 async function getEventList() {
   var sql =
-    "SELECT id AS event_id, name as event_title, start_date, start_time, end_date, end_time, location, city, state, CONCAT(?, banner) AS event_banner FROM events WHERE end_date >= CURDATE() AND status='Live / Upcoming';";
+    "SELECT id AS event_id, name as event_title, region, start_date, start_time, end_date, end_time, location, city, state, CONCAT(?, SUBSTRING(banner, 9)) AS event_banner FROM events WHERE end_date >= CURDATE() AND status='Live / Upcoming';";
   var inserts = [bucket_url];
   sql = mysql.format(sql, inserts);
   const [rows] = await pool.execute(sql);
@@ -21,7 +21,7 @@ async function getEventList() {
 
 async function getEventById(eventId) {
   var sql =
-    "SELECT id AS event_id, name as event_title, CONCAT(address_1, ' ',  COALESCE(address_2, '')) AS event_address, start_date, start_time, end_date, end_time, location, city, state, CONCAT(?, banner) AS event_banner, description FROM events WHERE id=?";
+    "SELECT id AS event_id, name as event_title, region, CONCAT(address_1, ' ',  COALESCE(address_2, '')) AS event_address, start_date, start_time, end_date, end_time, location, city, state, CONCAT(?, SUBSTRING(banner, 9)) AS event_banner, description FROM events WHERE id=?";
   var inserts = [bucket_url, eventId];
   sql = mysql.format(sql, inserts);
   const [rows] = await pool.execute(sql);
