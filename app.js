@@ -1,7 +1,10 @@
 "use strict";
 const express = require("express");
 const app = express();
+var cors = require('cors');
 const { getEventList, getEventById } = require("./db_utils");
+
+app.use(cors());
 
 app.get("/events/list", async (req, res) => {
   const events = await getEventList();
