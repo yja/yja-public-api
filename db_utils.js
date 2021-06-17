@@ -28,7 +28,15 @@ async function getEventById(eventId) {
   return rows[0];
 }
 
+async function getCommunityList() {
+  var sql =
+    "SELECT id, title, team, subtitle, image, link, likes FROM community_content;";
+  const [rows] = await pool.execute(sql);
+  return rows;
+}
+
 module.exports = {
   getEventList,
-  getEventById
+  getEventById,
+  getCommunityList
 };

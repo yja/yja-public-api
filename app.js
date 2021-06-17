@@ -2,9 +2,16 @@
 const express = require("express");
 const app = express();
 var cors = require('cors');
-const { getEventList, getEventById } = require("./db_utils");
+const { getEventList, getEventById, getCommunityList } = require("./db_utils");
 
 app.use(cors());
+
+app.get("/community/list", async (req, res) => {
+  const community = await getCommunityList();
+  return res.json({
+    community
+  });
+});
 
 app.get("/events/list", async (req, res) => {
   const events = await getEventList();
